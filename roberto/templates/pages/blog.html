@@ -1,0 +1,176 @@
+{% extends "bases/base.html" %}
+
+
+{% block content %}
+
+<!-- Breadcrumb Area Start -->
+<div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(/static/img/bg-img/17.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="breadcrumb-content text-center">
+                    <h2 class="page-title">Blog Left Sidebar</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog Left Sidebar</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End -->
+
+<!-- Blog Area Start -->
+<div class="roberto-news-area section-padding-100-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                {% for articles in article  %}
+                
+                <!-- Single Blog Post Area -->
+                <div class="single-blog-post d-flex align-items-center mb-50 wow fadeInUp" data-wow-delay="100ms">
+                    <!-- Post Thumbnail -->
+                    <div class="post-thumbnail">
+                        <a href="#"><img src="{{articles.image.url}}" alt=""></a>
+                    </div>
+                    <!-- Post Content -->
+                    <div class="post-content">
+                        <!-- Post Meta -->
+                        <div class="post-meta">
+                            <a href="#" class="post-author">{{articles.date_add}}</a>
+                            <a href="#" class="post-tutorial">{{articles.Category_id}}</a>
+                        </div>
+                        <!-- Post Title -->
+                        <a href="#" class="post-title">{{articles.title}}</a>
+                        <p>{{articles.description | truncatechars:'200'}}</p>
+                        <a href="{% url 'singleblog' articles.id %}" class="btn continue-btn">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+
+                
+                <!-- Pagination -->
+                <nav class="roberto-pagination wow fadeInUp mb-100" data-wow-delay="600ms">
+                    
+                    <ul class="pagination">
+                        {% if article.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ article.previous_page_number }}"><i class="fa fa-angle-left"> Prev</i></a></li>
+                        {% endif %}
+
+                        {% for i in paginator.page_range %}
+                            {% if article.page_number == i %}
+                                <li class="page-item" class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                <!-- <li class="active page-item"><a class="page-link" href="?page={{ article.paginator.num_pages }}">2</a></li> -->
+
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <!-- <li class="page-item"><a class="page-link" href="?page={{ article.paginator.num_pages }}">2</a></li> -->
+
+                        {% if article.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ article.next_page_number }}">Next <i class="fa fa-angle-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                   
+                </nav>
+            </div>
+
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="roberto-sidebar-area pl-md-4">
+
+                    <!-- Newsletter -->
+                    <div class="single-widget-area mb-100">
+                        <div class="newsletter-form">
+                            <h5>Newsletter</h5>
+                            <p>Subscribe our newsletter gor get notification new updates.</p>
+                            
+                            <form action="#" method="post">
+                                <input type="email" name="nl-email" id="nlEmail" class="form-control" placeholder="Enter your email...">
+                                <button type="submit" class="btn roberto-btn w-100">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Recent Post -->
+                    <div class="single-widget-area mb-100">
+                        <h4 class="widget-title mb-30">Recent News</h4>
+                        {% for articles in article  %}
+                        <!-- Single Recent Post -->
+                        <div class="single-recent-post d-flex">
+                            <!-- Thumb -->
+                            <div class="post-thumb">
+                                <a href="{% url 'singleblog' articles.id %}"><img src="{{articles.image.url}}" alt=""></a>
+                            </div>
+                            <!-- Content -->
+                            <div class="post-content">
+                                <!-- Post Meta -->
+                                <div class="post-meta">
+                                    <a href="#" class="post-author">{{articles.date_add}}</a>
+                                    <a href="#" class="post-tutorial">{{articles.Category_id}}</a>
+                                </div>
+                                <a href="{% url 'singleblog' articles.id %}" class="post-title">{{articles.title}}</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Popular Tags -->
+                    <div class="single-widget-area mb-100 clearfix">
+                        <h4 class="widget-title mb-30">Tags</h4>
+                        <!-- Popular Tags -->
+                        <ul class="popular-tags">
+                            {% for tags in tag  %}
+                            <li><a href="#">{{tags.Category_id}},</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- Instagram -->
+                    <div class="single-widget-area mb-100 clearfix">
+                        <h4 class="widget-title mb-30">Instagram</h4>
+                        <!-- Instagram Feeds -->
+                        <ul class="instagram-feeds">
+                            {% for instagrams in instagram  %}
+                            <li><a href="#"><img src="{{instagrams.image.url}}" alt=""></a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Area End -->
+
+<!-- Call To Action Area Start -->
+<section class="roberto-cta-area">
+    <div class="container">
+        <div class="cta-content bg-img bg-overlay jarallax" style="background-image: url(/static/img/bg-img/1.jpg);">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-7">
+                    <div class="cta-text mb-50">
+                        <h2>Contact us now!</h2>
+                        <h6>Contact (+12) 345-678-9999 to book directly or for advice</h6>
+                    </div>
+                </div>
+                <div class="col-12 col-md-5 text-right">
+                    <a href="#" class="btn roberto-btn mb-50">Contact Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call To Action Area End -->
+
+
+
+{% endblock content %}
+    
+
+    
