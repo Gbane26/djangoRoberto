@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rober.apps.RoberConfig',
     'blog.apps.BlogConfig',
+    'contact.apps.ContactConfig',
+    'room.apps.RoomConfig',
 ]
 
 MIDDLEWARE = [

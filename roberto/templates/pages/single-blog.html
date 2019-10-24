@@ -85,7 +85,7 @@
                                 </div>
                                 <!-- Comment Meta -->
                                 <div class="comment-meta">
-                                    <a href="#" class="post-date">{{comment.date_add}}</a>
+                                    <a href="#" class="post-date">{{comment.date_add|date:"d M Y"}}</a>
                                     <h5>{{comment.author}}</h5>
                                     <p>{{comment.message}}</p>
                                     <a href="#" class="like">Like</a>
@@ -103,7 +103,7 @@
                                         </div>
                                         <!-- Comment Meta -->
                                         <div class="comment-meta">
-                                            <a href="#" class="post-date">{{comment.date_add}}</a>
+                                            <a href="#" class="post-date">{{comment.date_add|date:"d M Y"}}</a>
                                             <h5>{{comment.author}}</h5>
                                             <p>{{comment.message}}</p>
                                             <a href="#" class="like">Like</a>
@@ -141,14 +141,14 @@
                     <h2>Leave A Comment</h2>
 
                     <!-- Form -->
-                    <form action="/singleblog/{{ post.id }}/" method="post">
+                    <form action="{% url 'singleblog' id %}" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-12">
-                                <input type="text" name="message-name" class="form-control mb-30" placeholder="Your Name">
+                                <input type="text" name="author" class="form-control mb-30" placeholder="Your Name">
                             </div>
                             <div class="col-12">
-                                <input type="email" name="message-email" class="form-control mb-30" placeholder="Email">
+                                <input type="email" name="email" class="form-control mb-30" placeholder="Email">
                             </div>
                             <div class="col-12">
                                 <input type="text" name="website" class="form-control mb-30" placeholder="Websites">
@@ -174,8 +174,9 @@
                             <h5>Newsletter</h5>
                             <p>Subscribe our newsletter gor get notification new updates.</p>
 
-                            <form action="#" method="post">
-                                <input type="email" name="nl-email" id="nlEmail" class="form-control" placeholder="Enter your email...">
+                            <form action="{% url 'singleblog' id %}" method="post">
+                                {% csrf_token %}
+                                <input type="email" name="email" id="nlEmail" class="form-control" placeholder="Enter your email...">
                                 <button type="submit" class="btn roberto-btn w-100">Subscribe</button>
                             </form>
                         </div>
@@ -195,7 +196,7 @@
                             <div class="post-content">
                                 <!-- Post Meta -->
                                 <div class="post-meta">
-                                    <a href="#" class="post-author">{{articles.date_add}}</a>
+                                    <a href="#" class="post-author">{{articles.date_add|date:"d M Y"}}</a>
                                     <a href="#" class="post-tutorial">{{articles.Category_id}}</a>
                                 </div>
                                 <a href="{% url 'singleblog' %}" class="post-title">{{articles.title}}</a>

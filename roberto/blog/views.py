@@ -35,20 +35,24 @@ def singleblog(request, id):
     instagram = Instagram.objects.all()
     tag = Tag.objects.all()
     comment = Comment.objects.all()
+    
+    email = request.POST.get('email')
+    author = request.POST.get('author')
+    emails = request.POST.get('email')
+    website = request.POST.get('website')
+    message = request.POST.get('message')
+    
+    if email is not None:
+	    h = Newsletter(email=email)
+	    h.save()
 
-    form = Comment()
-    if request.method == "POST":
-         form = Comment(request.POST)
-         if form.is_valid():
-            comment = Comment(
-                author=form.cleaned_data["author"],
-                email=form.cleaned_data["email"],
-                message=form.cleaned_data["message"],
-                article=article,
-            )
-            comment.save()
+    if author is not None and emails is not None and website is not None and message is not None:
+        me = Comment(author=author, email=emails, website=website, message=message, Article_id = article)
+        me.save()
 
-    context = { "articles": article, "instagram": instagram, "tag": tag, "comment": comment, "form": form}
+    
+
+    context = { "articles": article, "instagram": instagram, "tag": tag, "comment": comment, "id":id}
     return render(request, 'pages/single-blog.html', context)
 
 

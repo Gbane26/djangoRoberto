@@ -11,14 +11,4 @@ def about(request):
     return render(request, 'pages/about.html')
 
 
-def contact(request):
-    return render(request, 'pages/contact.html')
-
-def room(request):
-    return render(request, 'pages/room.html')
-
-
-
-def singleroom(request):
-    return render(request, 'pages/single-room.html')
 

@@ -40,7 +40,7 @@
                     <div class="post-content">
                         <!-- Post Meta -->
                         <div class="post-meta">
-                            <a href="#" class="post-author">{{articles.date_add}}</a>
+                            <a href="#" class="post-author">{{articles.date_add|date:"d M Y"}}</a>
                             <a href="#" class="post-tutorial">{{articles.Category_id}}</a>
                         </div>
                         <!-- Post Title -->
@@ -110,7 +110,7 @@
                             <div class="post-content">
                                 <!-- Post Meta -->
                                 <div class="post-meta">
-                                    <a href="#" class="post-author">{{articles.date_add}}</a>
+                                    <a href="#" class="post-author">{{articles.date_add|date:"d M Y"}}</a>
                                     <a href="#" class="post-tutorial">{{articles.Category_id}}</a>
                                 </div>
                                 <a href="{% url 'singleblog' articles.id %}" class="post-title">{{articles.title}}</a>
